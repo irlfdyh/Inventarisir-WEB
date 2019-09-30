@@ -1,6 +1,6 @@
 <?php
 
-    class jenis_model extends CI_Model{
+    class ruang_model extends CI_Model{
 
         /**
          * Model untuk koneksi dari databse
@@ -20,10 +20,11 @@
             return $result;
         }
 
-        function checkID($id_ruang){
+        function cekID($id_ruang){
             $result = $this->db->query(
                 "SELECT * FROM ruang where id_ruang = '".$id_ruang."';"
             );
+            return $result;
         }
 
     }
