@@ -5,6 +5,17 @@
         function __construct(){
             parent::__construct();
             $this->load->model('ruang_model');
+            $this->load->model("LoginModel");
+		    $this->load->library("session");
+		
+            if ($this->session->userdata("login") != TRUE) {
+                echo '
+                        <script>
+                            alert("Login Dulu!");
+                            window.location = "'.base_url('index.php/LoginController').'";
+                        </script>
+                        ';
+            } 
         }
 
         function index(){
@@ -30,29 +41,42 @@
             $keterangan = $this->input->post("keterangan");
 
             if(isset($submit)){
-                $data = [
-                    "id_ruang" => null,
-                    "kode_ruang" => $kode_ruang,
-                    "nama_ruang" => $nama_ruang,
-                    "keterangan" => $keterangan
-                ];
-                $this->db->insert("ruang", $data);
 
-                if ($this->db->affected_rows() > 0){
-                    echo '
-					<script>
-						alert("Data Jenis Berhasil Ditambahkan");
-						window.location = "'.base_url('index.php/ruang').'";
-					</script>
-				    ';
+                $check = $this->ruang_model->cekKode($kode_ruang);
+
+                if ($check->num_rows() == 0){
+                    $data = [
+                        "id_ruang" => null,
+                        "kode_ruang" => $kode_ruang,
+                        "nama_ruang" => $nama_ruang,
+                        "keterangan" => $keterangan
+                    ];
+                    $this->db->insert("ruang", $data);
+
+                    if ($this->db->affected_rows() > 0){
+                        echo '
+                        <script>
+                            alert("Data Ruang Berhasil Ditambahkan");
+                            window.location = "'.base_url('index.php/ruang').'";
+                        </script>
+                        ';
+                    } else {
+                        echo '
+                        <script>
+                            alert("Data Ruang Gagal Ditambahkan");
+                            window.location = "'.base_url('ruang/add').'";
+                        </script>
+                        ';
+                    }
                 } else {
                     echo '
-					<script>
-						alert("Data Jenis Gagal Ditambahkan");
-						window.location = "'.base_url('ruang/add').'";
-					</script>
-				    ';
+                        <script>
+                            alert("Data Ruang Sudah ada");
+                            window.location = "'.base_url('index.php/ruang/add').'";
+                        </script>
+                        ';
                 }
+
 
             } else {
                 show_404();

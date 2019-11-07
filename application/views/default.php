@@ -14,6 +14,7 @@
 						Untuk memenuhi tugas akhir RPL
 					</p>
 				</div>
+				<?php echo anchor('LoginController/destroy', 'Logout') ?>
 			</div>
 
 			<div class="row">
@@ -25,7 +26,7 @@
 								<li><?php echo anchor ('dashboard', 'Dashboard');?></li>
 							</ul>
 							<ul>
-								<li><?php echo anchor ('inventarisir', 'Inventarisir');?></li>
+								<li><?php echo anchor ('inventaris', 'Inventaris');?></li>
 									<ul>
 										<li><?php echo anchor ('jenis', 'Jenis Barang');?></li>
 										<li><?php echo anchor ('ruang', 'Ruangan');?></li>

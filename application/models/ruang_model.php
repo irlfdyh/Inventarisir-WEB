@@ -13,9 +13,9 @@
             return $result;
         }
 
-        function cekKode($id){
+        function cekKode($kode_ruang){
             $result = $this->db->query(
-                "SELECT * FROM ruang WHERE kode_ruang = '".$kode."';"
+                "SELECT * FROM ruang WHERE kode_ruang = '".$kode_ruang."';"
             );
             return $result;
         }
