@@ -83,17 +83,17 @@
 
                 if( $this->db->affected_rows() > 0 ) {
                     echo '
-                        <script>
-                            alert("Data Berhasil Ditambahkan");
-                            window.location = "'.base_url('index.php/inventaris').'";
-                        </script>
+                            <script>
+                                alert("Data Berhasil Ditambahkan");
+                                window.location = "'.base_url('index.php/inventaris').'";
+                            </script>
                         ';
                 }else {
                     echo '
-                        <script>
-                            alert("Data Gagal Ditambahkan");
-                            window.location = "'.base_url('index.php/inventaris').'";
-                        </script>
+                            <script>
+                                alert("Data Gagal Ditambahkan");
+                                window.location = "'.base_url('index.php/inventaris').'";
+                            </script>
                         ';
                 }
 			}else{

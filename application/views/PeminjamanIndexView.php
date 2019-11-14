@@ -1,6 +1,6 @@
 <?php
     echo anchor(
-        'inventaris/add',
+        'PeminjamanController/add',
         'tambah data',
         'class="btn btn-success mb-3"'
     );
@@ -13,7 +13,7 @@
 			<th>NAMA INVENTARIS</th>
 			<th>JENIS</th>
 			<th>RUANG</th>
-			<th>JUMLAH</th>
+			<th>JUMLAH PINJAM</th>
 			<th>AKSI</th>
 		</tr>
     </thead>

@@ -25,6 +25,70 @@
 
             $this->load->view("default", $data);
         }
+
+        function add() {
+            $data["judul_content"] = "Tambah Data Peminjaman";
+            $data["isi_content"] = "PeminjamanAddView";
+
+            $data["inventaris"] = $this->PeminjamanModel->dropdownInvent();
+
+            $this->load->view("default", $data);
+        }
+
+        function addExecute() {
+            $this->load->model("PeminjamanModel");
+            $submit = $this->input->post("submitInvent");
+            $idInvent = $this->input->post("idInvent");
+            $jumlahPinjam = $this->input->post("jumlah");
+            $jumlahBarang = $this->PeminjamanModel->getAmount($idInvent);
+            $sisa = $jumlahBarang - $jumlahPinjam;
+
+            if (isset($submit)) {
+                $data = [
+                    "id_peminjaman" => NULL,
+                    "tanggal_pinjam" => date("Y-m-d H:i:s"),
+                    "tanggal_kembali" => NULL,
+                    "status_peminjaman" => "dipinjam",
+                    "id_pegawai" => NULL
+                ];
+
+                $detailData = [
+                    "id_detail_pinjam" =>NULL,
+                    "id_inventaris" => $idInvent,
+                    "id_peminjaman" => 1,
+                    "jumlah" => $jumlahPinjam
+                ];
+
+                $dataUpdate = [
+                    "jumlah" => $sisa
+                ];
+
+                $insert = $this->db->insert("peminjaman", $data);
+                $insert = $this->db->insert("detail_pinjam", $detailData);
+
+                /** update inventaris amount */
+                $this->db->where("id_inventaris", $idInvent);
+                $update = $this->db->update("inventaris", $dataUpdate);
+
+                if ($this->db->affected_rows() > 0) {
+                    echo '
+                            <script>
+                                alert("Data Berhasil Ditambahkan");
+                                window.location = "'.base_url('index.php/PeminjamanController').'";
+                            </script>
+                        ';
+                } else {
+                    echo '
+                            <script>
+                                alert("Data Berhasil Ditambahkan");
+                                window.location = "'.base_url('index.php/PeminjamanController').'";
+                            </script>
+                        ';
+                }
+            } else {
+                show_404();
+            }
+        }
     }
 
 ?>
