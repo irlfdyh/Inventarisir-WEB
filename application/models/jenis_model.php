@@ -1,5 +1,6 @@
 <?php
-	class jenis_model extends CI_Model{
+	class jenis_model extends CI_Model {
+
 		function showAll (){
 			$result = $this->db->query("
 					SELECT * FROM jenis ORDER BY
@@ -7,7 +8,8 @@
 				");
 			return $result;
 		}
-		function cekkode($id){
+
+		function cekkode($id) {
 			$result = $this->db->query("
 				SELECT * FROM jenis WHERE kode_jenis = '".$kode."';
 

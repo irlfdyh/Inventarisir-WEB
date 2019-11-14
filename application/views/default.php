@@ -23,7 +23,12 @@
 						<div class="card-header text-center">MENU</div>
 						<div class="card-body">
 							<ul>
-								<li><?php echo anchor ('dashboard', 'Dashboard');?></li>
+								<li>
+									<?php 
+										/** call controller here */
+										echo anchor ('dashboard', 'Dashboard');
+									?>
+								</li>
 							</ul>
 							<ul>
 								<li><?php echo anchor ('inventaris', 'Inventaris');?></li>
@@ -36,13 +41,12 @@
 							<ul>
 								<li><?php echo anchor ('#', 'Transaksi');?></li>
 								<ul>
-									<li><?php echo anchor ('#', 'Peminjaman');?></li>
+									<li><?php echo anchor ('PeminjamanController', 'Peminjaman');?></li>
 									<li><?php echo anchor ('#', 'Pengembalian');?></li>
 								</ul>
 							</ul>
-
 							<ul>
-								<li><?php echo anchor ('#', 'Laporan');?></li>
+								<li><?php echo anchor ('LaporanController/pdfInventaris', 'Laporan');?></li>
 							</ul>
 
 						</div>

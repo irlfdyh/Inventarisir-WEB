@@ -5,10 +5,9 @@
         function __construct(){
             parent:: __construct();
 
+            $this->load->model("inventaris_model");
             $this->load->model("LoginModel");
             $this->load->library("session");
-            $this->load->model("inventaris_model");
-            
 
             if ($this->session->userdata("login") != TRUE) {
                 echo '
@@ -37,6 +36,7 @@
 
             $this->load->view("default", $data);
         }
+        
         function add(){
             $data["judul_content"] = "tambah data inventaris";
             $data["isi_content"] = "inventaris_add";
@@ -44,7 +44,7 @@
             $data["jenis"] = $this->inventaris_model->dropdownjenis();
             $data["ruang"] = $this->inventaris_model->dropdownruang();
 
-                $this->load->view("default", $data);
+            $this->load->view("default", $data);
         }
 
         function add_execute(){

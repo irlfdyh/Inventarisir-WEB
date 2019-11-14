@@ -20,7 +20,7 @@
 
 
 		function index() {
-			$data['judul_content'] = 'JENIS BARANG';
+			$data['judul_content'] = 'Daftar Jenis Barang';
 			$data['isi_content']	= 'jenis_index';
 			$data['data'] = $this->jenis_model->ShowAll();
 

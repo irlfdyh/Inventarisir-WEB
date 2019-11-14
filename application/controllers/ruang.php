@@ -19,7 +19,7 @@
         }
 
         function index(){
-            $data['judul_content'] = 'JENIS_RUANG';
+            $data['judul_content'] = 'Daftar Ruangan';
             $data['isi_content'] = 'ruang_index';
             $data['data'] = $this->ruang_model->showAll();
 

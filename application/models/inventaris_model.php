@@ -7,7 +7,9 @@
             SELECT 
                 inventaris.id_inventaris,
                 inventaris.nama, 
+                inventaris.kode_inventaris,
                 inventaris.jumlah, 
+                inventaris.kondisi,
                 ruang.nama_ruang, 
                 jenis.nama_jenis 
             FROM inventaris 
@@ -49,10 +51,14 @@
             return $result->row()->kode_ruang;
         }
 
-        function lastId(){
+        function lastId() {
             $query = $this->db->query("
               SELECT * FROM inventaris ORDER BY id_inventaris DESC LIMIT 1;
             ");
+            /** get last id from inventaris */
+            $row = $query->row(1);
+            /** return for setting id to 'kode_inventaris' */
+            return $row->id_inventaris+1;
         }
 
         function checkId($id_inventaris){

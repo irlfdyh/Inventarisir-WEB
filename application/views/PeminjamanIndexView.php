@@ -11,10 +11,8 @@
 		<tr class="text-center">
 			<th>NO</th>
 			<th>NAMA INVENTARIS</th>
-			<th>KODE INVENTARIS</th>
 			<th>JENIS</th>
 			<th>RUANG</th>
-			<th>KONDISI</th>
 			<th>JUMLAH</th>
 			<th>AKSI</th>
 		</tr>
@@ -28,10 +26,8 @@
                     <tr>
                         <td>'.$no.'</td>
                         <td>'.$row->nama.'</td>
-                        <td>'.$row->kode_inventaris.'</td>
                         <td>'.$row->nama_jenis.'</td>
                         <td>'.$row->nama_ruang.'</td>
-                        <td>'.$row->kondisi.'</td>
                         <td>'.$row->jumlah.'</td>
                         <td>
                             '.anchor('inventaris/edit/'.$row->id_inventaris, 'Edit', 'class="badge badge-primary"').'
