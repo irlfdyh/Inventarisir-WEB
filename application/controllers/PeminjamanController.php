@@ -96,14 +96,9 @@
         function getBack($id_peminjaman) {
             $this->load->model("PeminjamanModel");
 
-            // $this->db->where("id_peminjaman", $id_peminjaman);
-            // $result = $this->db->get();
-                // $getBorrowId = "
-                //     SELECT id_peminjaman FROM detail_pinjam WHERE id_detail_pinjam = $id_detail_pinjam
-                // ";
-            $jumlahBarang = $this->PeminjamanModel->getAmount($result);
-            $jumlahPinjam = $this->PeminjamanModel->getBorrow($id_peminjaman);
             $getInventId = $this->PeminjamanModel->getInventId($id_peminjaman);
+            $jumlahBarang = $this->PeminjamanModel->getAmount($getInventId);
+            $jumlahPinjam = $this->PeminjamanModel->getBorrow($id_peminjaman);
             
             $sumResult = $jumlahBarang+$jumlahPinjam;
 
@@ -123,6 +118,7 @@
             $this->db->where("id_peminjaman", $id_peminjaman);
             $update = $this->db->update("peminjaman", $status);
 
+            /** check  */
             if ($this->db->affected_rows() > 0) {
                 echo '
                         <script>

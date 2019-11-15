@@ -12,7 +12,7 @@
     echo '
             <div class="form-group">
                 <label>Jumlah</label>
-                ' . form_input('jumlah', '', 'class="form-control" placeholder="..." required') . '
+                ' . form_input('jumlah', '', 'class="form-control" placeholder="..." required min="1"') . '
             </div>
         ';
 
