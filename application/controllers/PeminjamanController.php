@@ -95,6 +95,11 @@
 
         function getBack($id_detail_pinjam) {
             $this->load->model("PeminjamanModel");
+
+            $getIdInvent = "
+                SELECT id_inventaris FROM 
+            ";
+
             $jumlahBarang = $this->PeminjamanModel->getAmount($id_detail_pinjam);
             $jumlahPinjam = $this->PeminjamanModel->getBorrow($id_detail_pinjam);
             

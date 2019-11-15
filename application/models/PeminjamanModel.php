@@ -32,6 +32,7 @@
             return $data;
         }
 
+        /** get amount count */
         function getAmount($idInvent) {
             $this->db->where("id_inventaris", $idInvent);
             $result = $this->db->get("inventaris");
@@ -39,6 +40,7 @@
             return $result->row()->jumlah;
         }
 
+        /** get borrow count */
         function getBorrow($idBorr) {
             $this->db->where("id_detail_pinjam", $idBorr);
             $result = $this->db->get("detail_pinjam");
