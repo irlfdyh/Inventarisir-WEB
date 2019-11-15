@@ -42,7 +42,7 @@
 								<li><?php echo anchor ('#', 'Transaksi');?></li>
 								<ul>
 									<li><?php echo anchor ('PeminjamanController', 'Peminjaman');?></li>
-									<li><?php echo anchor ('#', 'Pengembalian');?></li>
+									<li><?php echo anchor ('PengembalianController', 'Pengembalian');?></li>
 								</ul>
 							</ul>
 							<ul>

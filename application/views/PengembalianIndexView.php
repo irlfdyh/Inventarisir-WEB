@@ -1,11 +1,3 @@
-<?php
-    echo anchor(
-        'PeminjamanController/add',
-        'tambah data',
-        'class="btn btn-success mb-3"'
-    );
-?>
-
 <table class="table table-striped table-bordered">
 	<thead>
 		<tr class="text-center">
@@ -13,8 +5,8 @@
 			<th>NAMA INVENTARIS</th>
 			<th>JUMLAH PINJAM</th>
 			<th>TANGGAL PINJAM</th>
+			<th>TANGGAL KEMBALI</th>
 			<th>STATUS</th>
-			<th>AKSI</th>
 		</tr>
     </thead>
     
@@ -28,10 +20,8 @@
                         <td>'.$row->nama.'</td>
                         <td>'.$row->jumlah.'</td>
                         <td>'.$row->tanggal_pinjam.'</td>
+                        <td>'.$row->tanggal_kembali.'</td>
                         <td>'.$row->status_peminjaman.'</td>
-                        <td>
-                            '.anchor('PeminjamanController/getBack/'.$row->id_detail_pinjam, 'Kembalikan', 'class="badge badge-primary" onClick="return confirm(\'Barang Dikembalikan?\')" ').'
-                        </td>
                     </tr>
                 ';
                 $no++;

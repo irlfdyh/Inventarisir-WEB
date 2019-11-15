@@ -1,5 +1,6 @@
 <?php
     class PeminjamanController extends CI_Controller {
+
         function __construct() {
             parent:: __construct();
 
@@ -43,6 +44,8 @@
             $jumlahBarang = $this->PeminjamanModel->getAmount($idInvent);
             $sisa = $jumlahBarang - $jumlahPinjam;
 
+            $forDetail = $this->PeminjamanModel->getId();
+
             if (isset($submit)) {
                 $data = [
                     "id_peminjaman" => NULL,
@@ -55,7 +58,7 @@
                 $detailData = [
                     "id_detail_pinjam" =>NULL,
                     "id_inventaris" => $idInvent,
-                    "id_peminjaman" => 1,
+                    "id_peminjaman" => $forDetail,
                     "jumlah" => $jumlahPinjam
                 ];
 
@@ -88,6 +91,30 @@
             } else {
                 show_404();
             }
+        }
+
+        function getBack($id_detail_pinjam) {
+            $this->load->model("PeminjamanModel");
+            $jumlahBarang = $this->PeminjamanModel->getAmount($id_detail_pinjam);
+            $jumlahPinjam = $this->PeminjamanModel->getBorrow($id_detail_pinjam);
+            
+            $sumResult = $jumlahBarang+$jumlahPinjam;
+
+            $dataInvent = [
+                "jumlah" => $sumResult
+            ];
+
+            $status  = [
+                "status_peminjaman" => "dikembalikan"
+            ];
+
+            /** update inventaris amount */
+            $this->db->where("id_inventaris", $idInvent);
+            $update = $this->db->update("inventaris", $dataInvent);
+
+            $this->db->where("id_peminjaman", $idBorr);
+            $update = $this->db->update("peminjaman", $status);
+
         }
     }
 
