@@ -54,7 +54,7 @@
                                     window.location = "'.base_url('index.php/PeminjamanController/add').'";
                                 </script>
                         ';
-                } else if ($jumlahPinjam == 0) {
+                } else if ($jumlahPinjam <= 0) {
                     echo '
                                 <script>
                                     alert("Kamu Tidak Pinjam apa apa");

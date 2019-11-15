@@ -30,7 +30,7 @@
                         <td>'.$row->tanggal_pinjam.'</td>
                         <td>'.$row->status_peminjaman.'</td>
                         <td>
-                            '.anchor('PeminjamanController/getBack/'.$row->id_peminjaman, 'Kembalikan', 'class="badge badge-primary" onClick="return confirm(\'Barang Dikembalikan?\')" ').'
+                            '.anchor('PeminjamanController/getBack/'.$row->id_peminjaman, 'Kembalikan', 'class="badge badge-primary" onClick="return confirm(\'Kembalikan Barang?\')" ').'
                         </td>
                     </tr>
                 ';

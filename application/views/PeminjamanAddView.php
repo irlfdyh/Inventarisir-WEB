@@ -17,6 +17,6 @@
         ';
 
     echo form_submit('submitInvent', 'Simpan', 'class="btn btn-primary"');
-    echo anchor('peminjaman', 'Kembali', 'class="btn btn-danger float-right"');
+    echo anchor('PeminjamanController', 'Kembali', 'class="btn btn-danger float-right"');
     echo form_close();
 ?>
