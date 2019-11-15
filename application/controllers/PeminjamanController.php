@@ -83,7 +83,7 @@
                 } else {
                     echo '
                             <script>
-                                alert("Data Berhasil Ditambahkan");
+                                alert("Data Gagal Ditaagmbahkan");
                                 window.location = "'.base_url('index.php/PeminjamanController').'";
                             </script>
                         ';
@@ -93,15 +93,17 @@
             }
         }
 
-        function getBack($id_detail_pinjam) {
+        function getBack($id_peminjaman) {
             $this->load->model("PeminjamanModel");
 
-            $getIdInvent = "
-                SELECT id_inventaris FROM 
-            ";
-
-            $jumlahBarang = $this->PeminjamanModel->getAmount($id_detail_pinjam);
-            $jumlahPinjam = $this->PeminjamanModel->getBorrow($id_detail_pinjam);
+            // $this->db->where("id_peminjaman", $id_peminjaman);
+            // $result = $this->db->get();
+                // $getBorrowId = "
+                //     SELECT id_peminjaman FROM detail_pinjam WHERE id_detail_pinjam = $id_detail_pinjam
+                // ";
+            $jumlahBarang = $this->PeminjamanModel->getAmount($result);
+            $jumlahPinjam = $this->PeminjamanModel->getBorrow($id_peminjaman);
+            $getInventId = $this->PeminjamanModel->getInventId($id_peminjaman);
             
             $sumResult = $jumlahBarang+$jumlahPinjam;
 
@@ -110,15 +112,32 @@
             ];
 
             $status  = [
+                "tanggal_kembali" => date("Y-m-d H:i:s"),
                 "status_peminjaman" => "dikembalikan"
             ];
 
             /** update inventaris amount */
-            $this->db->where("id_inventaris", $idInvent);
+            $this->db->where("id_inventaris", $getInventId);
             $update = $this->db->update("inventaris", $dataInvent);
 
-            $this->db->where("id_peminjaman", $idBorr);
+            $this->db->where("id_peminjaman", $id_peminjaman);
             $update = $this->db->update("peminjaman", $status);
+
+            if ($this->db->affected_rows() > 0) {
+                echo '
+                        <script>
+                            alert("Data Berhasil Dikembalikan");
+                            window.location = "'.base_url('index.php/PeminjamanController').'";
+                        </script>
+                    ';
+            } else {
+                echo '
+                        <script>
+                            alert("Data Gagal Dikembalikan");
+                            window.location = "'.base_url('index.php/PeminjamanController').'";
+                        </script>
+                    ';
+            }
 
         }
     }

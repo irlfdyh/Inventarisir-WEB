@@ -48,6 +48,13 @@
             return $result->row()->jumlah;
         }
 
+        function getInventId($idPeminjaman) {
+            $this->db->where("id_peminjaman", $idPeminjaman);
+            $result = $this->db->get("detail_pinjam");
+
+            return $result->row()->id_inventaris;
+        }
+
         function showBack() {
             $sql = "
                 SELECT 
@@ -83,8 +90,5 @@
             }
         }
 
-        function getDetailBorrId($idDetail) {
-            
-        }
     }
 ?>
