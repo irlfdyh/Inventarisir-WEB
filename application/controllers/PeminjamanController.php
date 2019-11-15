@@ -47,46 +47,62 @@
             $forDetail = $this->PeminjamanModel->getId();
 
             if (isset($submit)) {
-                $data = [
-                    "id_peminjaman" => NULL,
-                    "tanggal_pinjam" => date("Y-m-d H:i:s"),
-                    "tanggal_kembali" => NULL,
-                    "status_peminjaman" => "dipinjam",
-                    "id_pegawai" => NULL
-                ];
-
-                $detailData = [
-                    "id_detail_pinjam" =>NULL,
-                    "id_inventaris" => $idInvent,
-                    "id_peminjaman" => $forDetail,
-                    "jumlah" => $jumlahPinjam
-                ];
-
-                $dataUpdate = [
-                    "jumlah" => $sisa
-                ];
-
-                $insert = $this->db->insert("peminjaman", $data);
-                $insert = $this->db->insert("detail_pinjam", $detailData);
-
-                /** update inventaris amount */
-                $this->db->where("id_inventaris", $idInvent);
-                $update = $this->db->update("inventaris", $dataUpdate);
-
-                if ($this->db->affected_rows() > 0) {
+                if ($jumlahBarang < $jumlahPinjam) {
                     echo '
-                            <script>
-                                alert("Data Berhasil Ditambahkan");
-                                window.location = "'.base_url('index.php/PeminjamanController').'";
-                            </script>
+                                <script>
+                                    alert("Jumlah barang tidak mencukupi");
+                                    window.location = "'.base_url('index.php/PeminjamanController/add').'";
+                                </script>
+                        ';
+                } else if ($jumlahPinjam == 0) {
+                    echo '
+                                <script>
+                                    alert("Kamu Tidak Pinjam apa apa");
+                                    window.location = "'.base_url('index.php/PeminjamanController/add').'";
+                                </script>
                         ';
                 } else {
-                    echo '
-                            <script>
-                                alert("Data Gagal Ditaagmbahkan");
-                                window.location = "'.base_url('index.php/PeminjamanController').'";
-                            </script>
-                        ';
+                    $data = [
+                        "id_peminjaman" => NULL,
+                        "tanggal_pinjam" => date("Y-m-d H:i:s"),
+                        "tanggal_kembali" => NULL,
+                        "status_peminjaman" => "dipinjam",
+                        "id_pegawai" => $this->session->userdata()->namespace
+                    ];
+    
+                    $detailData = [
+                        "id_detail_pinjam" =>NULL,
+                        "id_inventaris" => $idInvent,
+                        "id_peminjaman" => $forDetail,
+                        "jumlah" => $jumlahPinjam
+                    ];
+    
+                    $dataUpdate = [
+                        "jumlah" => $sisa
+                    ];
+    
+                    $insert = $this->db->insert("peminjaman", $data);
+                    $insert = $this->db->insert("detail_pinjam", $detailData);
+    
+                    /** update inventaris amount */
+                    $this->db->where("id_inventaris", $idInvent);
+                    $update = $this->db->update("inventaris", $dataUpdate);
+    
+                    if ($this->db->affected_rows() > 0) {
+                        echo '
+                                <script>
+                                    alert("Data Berhasil Ditambahkan");
+                                    window.location = "'.base_url('index.php/PeminjamanController').'";
+                                </script>
+                            ';
+                    } else {
+                        echo '
+                                <script>
+                                    alert("Data Gagal Ditaagmbahkan");
+                                    window.location = "'.base_url('index.php/PeminjamanController').'";
+                                </script>
+                            ';
+                    }
                 }
             } else {
                 show_404();

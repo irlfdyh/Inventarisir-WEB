@@ -21,14 +21,9 @@
             $data["data"] = $this->inventaris_model->showAll();
 
             $mpdf = new \Mpdf\Mpdf();
-            $html = $this->load->view('LaporanInventarisView', $data);
+            $html = $this->load->view('LaporanInventarisView', $data, true);
             $mpdf->WriteHTML($html);
             $mpdf->Output();
-
-            // foreach ($data as $data) {
-            //     $this->table->add_row($no. );
-
-            // }
         }
     }
 ?>

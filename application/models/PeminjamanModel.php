@@ -79,12 +79,12 @@
             $query = $this->db->get("inventaris");
 
             if ($query->result() != null) {
-                $sql = $this->db->query("
-                SELECT * FROM peminjaman ORDER BY id_peminjaman DESC LIMIT 1;
-            ");
+                    $sql = $this->db->query("
+                        SELECT * FROM peminjaman ORDER BY id_peminjaman DESC LIMIT 1;
+                    ");
 
-            $row = $sql->row(1);
-            return $row->id_peminjaman+1;
+                $row = $sql->row(1);
+                return $row->id_peminjaman+1;
             } else {
                 1;
             }
